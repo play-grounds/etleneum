@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="https://spux.org/css/spux.css" />
+<script type="application/ld+json" id="data">
+  {
+    "ok": true,
+    "value": {
+      "id": "co04ob1edje",
+      "code": "function __init__ ()\n  return {}\nend\n\nfunction fundfaucet ()\n  -- don't need to do anything here, any money you send will just be added\n  -- to the total contract funds.\nend\n\nfunction getmoney ()\n  -- here we require the user to be authenticated.\n  if not account.id then\n    -- this terminates the call execution and\n    -- invalidates anything that might have happened before.\n    error('you must be authenticated')\n  end\n\n  -- we let the user specify how much he's going to take from the faucet\n  local money_to_get = call.payload.money_to_get\n  if not money_to_get then\n    money_to_get = 10000 -- default to 10 sat\n  end\n  if money_to_get \u003e 10000 then\n    money_to_get = 10000 -- the amount is limited to 100 sat\n  end\n\n  -- this sends the money to the account balance of the caller\n  contract.send(account.id, money_to_get)\nend",
+      "name": "faucet 10 sats",
+      "readme": "This faucet will pay 10 sats until drained",
+      "state": {},
+      "created_at": "2020-09-06T11:01:54.424333Z",
+      "funds": 1556950,
+      "methods": [
+        { "name": "fundfaucet", "params": [], "auth": false },
+        { "name": "getmoney", "params": ["money_to_get"], "auth": true }
+      ]
+    }
+  }
+</script>
+<script type="module">
+  import { Component, h, html, render } from 'https://unpkg.com/spux?module'
+  import 'https://cdn.skypack.dev/dior'
+
+  async function renderAll () {
+    render(
+      html`
+        <h2 class="row">${di.data.value.name}</h2>
+        <div class="row">
+          <div class="row">
+            <a
+              target="_blank"
+              href="${'https://etleneum.com/~/contract/' + di.data.value.id}"
+              >${di.data.value.id}</a
+            >
+          </div>
+          <div class="row">${di.data.value.readme}</div>
+          <div class="row">${di.data.value.funds}</div>
+          <div class="row">
+            <pre>${JSON.stringify(di.data.value.state, null, 2)}</pre>
+          </div>
+          <div class="row"><pre>${di.data.value.code}</pre></div>
+        </div>
+      `,
+      document.body
+    )
+  }
+
+  async function main () {
+    renderAll()
+  }
+
+  main()
+</script>
