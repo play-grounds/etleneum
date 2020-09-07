@@ -1,0 +1,250 @@
+<link rel="stylesheet" href="https://spux.org/css/spux.css" />
+<script type="application/ld+json" id="data">
+  {
+    "ok": true,
+    "value": [
+      {
+        "id": "cew5i79gyj",
+        "name": "Stupid lottery",
+        "readme": "You can bet any amount provided it's less than 1/4 of the total contract funds (if you bet more the remainder will go to your account).\n\nRemember to be logged when making the bets as the contract needs to send money to your account in case you win.\n\nThe winning odds are always 50% and you always get 2x your bet if you win.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 55356140,
+        "ncalls": 619,
+        "methods": null
+      },
+      {
+        "id": "co04ob1edje",
+        "name": "faucet 10 sats",
+        "readme": "This faucet will pay 10 sats until drained",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 1556950,
+        "ncalls": 89,
+        "methods": null
+      },
+      {
+        "id": "cjc1jv1gex4",
+        "name": "Simple Predictions",
+        "readme": "To create markets, increase a market's liquidity and buy or sell shares, please use the UI at https://predictions.etleneum.com/ or compatible (since it involves some calculation that must be done before calling). To resolve markets you can use the interface here.\n\nThis contract enables anyone to create a prediction market (with just \"yes\" or \"no\" possible results) that can be resolved at anytime by a set of predefined Etleneum accounts. The market creator chooses which accounts will resolve it and people can buy and sell shares of _yes_ or _no_. By default the market creator will be the sole resolver, but they can also make the `createmarket` call unauthenticated and specify a list of resolvers manually (beware: specifying an invalid resolver will probably cause the market to never resolve).\n\nIt comes with an automated market maker is based on the simplest version of [this algorithm](https://bitcoinhivemind.com/papers/LogMSR_Demo.xlsx). For it to work the market creator must make an initial deposit and after that the market will never be bankrupt. A _liquidity factor_ is also specified upon market creation, it specifies basically how much capital the creator wants to deposit initially to make the market less volatile. The liquidity factor can be increased after the market is operational by calling `increaseliquidity` and making a donation to the market's funds.\n\n`exchange` can be called with either a positive or a negative number of shares. If negative, these shares will be sold and the money will be sent to the seller's account. If positive, the correct amount of satoshis will have to be included in the call.\n\n---\n\nIf you're interested in a more complete version of this contract with much better trust assumptions and censorship-resistance that can scale to guide decisions and public opinion on matters of great public importance, take a look at https://bitcoinhivemind.com/.\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 171176295,
+        "ncalls": 264,
+        "methods": null
+      },
+      {
+        "id": "ce00f1dyc5",
+        "name": "ChainMarket Accumulator",
+        "readme": "This contract just accumulates satoshis before sending them to [ChainMarket](https://etleneum.com/#/contract/c8w0c13v75).\n\nYou want this only to prevent someone from taking your offers while they're too small and then you end up creating small UTXOs which you may not want.\n\nYou can call `queue` multiple times here targeting the same address and when the pool size limit is reached all accumulated sats are combined in a single call to ChainMarket's `queuepay` method.\n\nYou define the pool size at the time you're calling `queue`. You can have different pools at the same time targeting the same address.\n\nFees are also accumulated. Each different `queue` call can have a different amount in fees.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 145700000,
+        "ncalls": 119,
+        "methods": null
+      },
+      {
+        "id": "c7c491sw04",
+        "name": "Contract Aliases",
+        "readme": "A place where everybody can set aliases to contract ids or reuse aliases set by others.\n\nUsed by the [@lntxbot](https://t.me/lntxbot) integration.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 0,
+        "ncalls": 12,
+        "methods": null
+      },
+      {
+        "id": "c680z7fefr",
+        "name": "MegaSats",
+        "readme": "A lottery with progressive jackpots that only expires when someone wins.\n\nTo get a chance to win, you must buy a ticket _and choose a number for your ticket_. You can choose numbers **from 0 to {{math.floor(16^3)}}**. You can buy any number of tickets you want.\n\nDrawings are limited to one every _144 blocks_ (1 day). Anyone can initiate a draw.\n\nThe winner number will be given by the last 3 characters of the hash of the block number just after the last ticket was bought, reversed and translated to decimal. **Provably fair!**\n\nIf no one wins, the prize is accumulated to the next drawing round, and you don't lose your tickets!\n\nThe last drawing was at Bitcoin _block {{0}}_.\nThe current pot is **{{math.floor(funds/1000)}} sat**.\nThe current ticket price is _{{state.ticket_price_sats}} sat_.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 4731000,
+        "ncalls": 81,
+        "methods": null
+      },
+      {
+        "id": "cuw5v51nz93",
+        "name": "Donate Here !!",
+        "readme": "",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 655000,
+        "ncalls": 6,
+        "methods": null
+      },
+      {
+        "id": "c4w191fezu",
+        "name": "Lichess Challenge",
+        "readme": "A contract too complex to be called manually.\nMust be used from the interface at https://lichess.etleneum.com/.\n\nBasically you create an [open-ended game](https://lichess.org/api#operation/challengeOpen) on lichess.org, call `openchallenge`, then share an URL with a friend whom you want to challenge. They call `acceptchallenge`. You go to play on lichess.org and after the game is over the winner calls `extract` to redeem the satoshis that were bet previously.\n\nYou don't have to be authenticated on etleneum.com to create or accept the challenge, only at the `extract` phase. Hopefully this makes it possible for people to play first without having to deal with bureaucracy and only later (if they win) do anything about it.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 6700000,
+        "ncalls": 43,
+        "methods": null
+      },
+      {
+        "id": "co03uf7gdhc",
+        "name": "Airdrop for Keybase accounts",
+        "readme": "Any Keybase account that succeeds in linking themselves to an Etleneum account using the [cog4wt7q8n3](#/contract/cog4wt7q8n3) contract can claim **1000 sat**.\n\nTo do that, first [login](#/account) then visit https://etleneum.com/#/contract/cog4wt7q8n3 or https://kad.etleneum.com/ and provide a valid signature for the given challenge.\n\nThen come back here and make an authenticated `claim` call.\n\nAfter that you'll be able to [withdraw your earnings](#/account).",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 5000000,
+        "ncalls": 14,
+        "methods": null
+      },
+      {
+        "id": "cog4wt7q8n3",
+        "name": "Keybase Account Directory",
+        "readme": "This exists so you can link your etleneum.com account (which is just a random id) with a [Keybase](https://keybase.io) account. Could be useful so people can be find your account and refer to your etleneum.com id in other contracts or calls and send you money knowing it's really you.\n\nTo `link` an identity, make an authenticated call providing your `keybase_name` and a `bundle` of message + signature as produced by https://keybase.io/sign. The message must be `{{state.challenge}}` and the bundle must be passed with the correct newlines. Example:\n\nHelper site with less intimidating interface: https://kad.etleneum.com/\n\n```\n-----BEGIN PGP SIGNED MESSAGE-----\nHash: SHA512\n\n{{state.challenge}}\n-----BEGIN PGP SIGNATURE-----\nVersion: Keybase OpenPGP v2.1.3\nComment: https://keybase.io/crypto\n\nwsBcBAABCgAGBQJdrR2oAAoJEAJs7pbOl+xqQA0H/32xUyVE+GSxsJ5xN1IbbBsK\neZH7H2IqQ+VTWUcS1x2JprsfKWlZ9Eks3mWpSOG6Jb9TUX08t+JAMS56uZNU5zeX\nwN5i3Cc6V9R7q0Nzk/b2Z7wsZfuyhoxF/ybCnYy4Mj5NnkIo+yt44+s3L3MA1aEg\nnkcg9JeJHzdu/jwQ4Lc6StJ8d3OV+7igQo8Ax0aAFV7pS3tSg3upqd6M5JtmiuIq\n4lkU4NkaGGMJTnpCcUajn+z9isUUyQR5B+sMI3w7Q6jNZ0FRe7NAVKxl3d6QfwA9\npDYxl6ZWEnVSWjqM6V2Rncu1zR4g83++z8bqWrK2FBm8EzTHUVDPChPwEzFHLrQ=\n=LcDv\n-----END PGP SIGNATURE-----\n```\n\nTo `unlink` an identity, do the same, but _make the call unauthenticated_. The `unlink` method is just an alias.\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 0,
+        "ncalls": 25,
+        "methods": null
+      },
+      {
+        "id": "cmg8n7a3mu",
+        "name": "sats4answers",
+        "readme": "This contract allows anyone to `ask` questions to any known person (identified by their [Keybase](https://keybase.io/) username) and actually get answers.\n\nHelpers website with less intimidating interface: https://s4a.etleneum.com/\n\n---\n\nAskers attach **money compensations** to their questions, so the person to whom they're asking are incentivized to spend some minutes crafting an `answer`.\n\nMore than that: if some other person is also interested in the answer to that specific question they can `add_funds` to it to increase the incentives and the possibilities of attracting the attention of the person being asked.\n\nIf after some time it's feeling like an answer isn't coming any of the askers or funders can `remove_funds` from any given question. **Be sure to make authenticated calls when creating questions or adding funds**, otherwise you won't be able to remove the funds later.\n\nOnce the requested user posts an answer they will **get all the funds** and **the answer will be saved forever** in the contract.\n\n_To answer a question it is necessary for the answerer to first have its Etleneum account linked to a Keybase account through the [Keybase Account Directory](https://etleneum.com/#/contract/cog4wt7q8n3) contract._\n\n**Why wouldn't the answerer just post a random string as the answer and claim the funds?** That's perfectly possible to do, but by doing that they would be showing themselves as jerks to everybody and will likely not ever get a question again.\n\n**Why is it possible to post questions while unauthenticated?** Although that causes the attached funds to not be able to be removed, I think it makes sense to allow for the possibility of anonymous questions to appear.\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 28980000,
+        "ncalls": 68,
+        "methods": null
+      },
+      {
+        "id": "c8w0c13v75",
+        "name": "ChainMarket",
+        "readme": "For a nicer interface to this contract see https://chainmarket.etleneum.com/\n\nThis contract allows Lightning users to send payments to addresses on the blockchain and for people with onchain coins to turn them into Lightning satoshis.\n\nIt goes like this:\n\n  1. Alice has Lightning satoshis and wants to send them to address 3mno... onchain. Alice calls `queuepay` method with `{addr, fee_msat}` and the amount of satoshis she wants to send to 3mno... + the amount of msatoshis specified. That will create a pending offer.\n  2. Now Bob appears. Bob wants to send satoshis to the address bc1ymq... onchain. Bob calls `queuepay`. Now there are two pending offers.\n  3. Charlie has coins onchain and wants to get some satoshis on Lightning. He notices that he can send a batched transaction to 3mno... and bc1ymq... with the specified amounts in the pending offers, pay the fees and still pocket some extra sats from the sum of `fee_msat` of both offers.\n  4. Before doing anything, Charlie calls `reserve`. That will ensure he has the right to fulfill these two offers without anyone messing up with them before him. When calling `reserve` Charlie includes _200 sat_ just to keep him honest. If he doesn't fulfill the offers in the expected time (6 blocks) these sats will be added to the `fee_msat` of the two offers.\n  5. Then Charlie publishes the batched transaction to the blockchain and calls `txsent` with the transaction id. Once the transaction is confirmed he is awarded with the sats.\n\n**Other details**\n\n- Anytime a `queuepay` is called with an address for which there is already an offer, the new satoshis and fees will just be added to that offer (unless the offer is reserved, in that case the call will fail). You can use that to increase the fees if no one is taking your payment, for example.\n- Onchain transactions must have outputs with **exact** values, otherwise they won't be recognized.\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 1423020000,
+        "ncalls": 130,
+        "methods": null
+      },
+      {
+        "id": "ctc1f1mti8",
+        "name": "Feature Requests",
+        "readme": "This contract allows any project owner to create a page users can request new features from.\n\nWith each request users must attach some satoshis. To upvote requests, users also attach satoshis (each counts as one vote).\n\nProject owners are free to `cancel` features and keep the money, it's not as if users were hiring the project owner. When a feature is implemented it is marked as `finished`.\n\nWhen creating a project page owners must supply a `name` a `logo` URL, a project `URL` and a `key`. Each project page will be automatically hosted on `https://features.etleneum.com/#/{key}`.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 59117000,
+        "ncalls": 35,
+        "methods": null
+      },
+      {
+        "id": "cbc48f74xgz",
+        "name": "Trivia",
+        "readme": "A simple game: you ask difficult questions and place a prize on them.\nIf someone knows the answer they take the money.\n\n## To ask a question: `create`\n\nBefore posting a question you must compute the SHA256 of the answer. That can be done in your terminal with `echo -n \"answer goes here\" | sha256sum` or using services like https://passwordsgenerator.net/sha256-hash-generator/ (note that lower and uppercase are different and that answer will only match if it's written perfectly like you did, no deviations of any character allowed).\n\nYou can provide an array of alternatives as the \"hint\" or even just some text with additional info there.\n\nYou don't have to be authenticated for this call. \n\n---\n\n## To answer a question: `answer`\n\nYou have to be [authenticated](#/account) for this call (otherwise to where would the money go?).\n\nJust send the answer. You don't even have to specify the question you're answering, because if the SHA256 hash of your answer matches any question you'll get the prize for that question.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 621000,
+        "ncalls": 26,
+        "methods": null
+      },
+      {
+        "id": "czs3z7j9zf",
+        "name": "etleneum.com background-color setter",
+        "readme": "`sethue` allows you to set a value between 0 and 360 that will be used as the \"hue\" of the background-color of this website in an HSL formula.\n\nBe sure to pay at least 10 sat as the price for having this amazing color-changing opportunity!",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 0,
+        "ncalls": 35,
+        "methods": null
+      },
+      {
+        "id": "cko001spd3",
+        "name": "Banner Ads",
+        "readme": "A marketplace for ads.\n\nIt goes like this:\n\n* Alice has a website, she calls `place_banner` in this contract specifying the website address _https://alice.com/_ and a price per hour and it gets assigned the id _cxyz963_.\n* Then she uses server-side code or installs a JavaScript widget at _https://alice.com/_ that shows the current active ad for _cxyz963_.\n* Bob wants to advertise his business _Bob's Mushrooms_, he is casually browsing _https://alice.com/_, sees the banner there, empty, saying \"advertise here\" and linking to this contract and the banner id.\n* He decides Alice is trustworthy enough to actually display the ad he is going to pay for instead of just faking the display and getting the money anyway.\n* He calls `queue_ad` with the address of mushroom picture as `image_url` and _https://bobsmushrooms.com/_ as the `link`.\n\nHelper website with less intimidating interface: https://banners.etleneum.com/\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 301001,
+        "ncalls": 317,
+        "methods": null
+      },
+      {
+        "id": "c4g4e71a5g",
+        "name": "Reverse Crowdfunding",
+        "readme": "Instead of someone saying: \"I will do X and I need your money\", this contract allows people to commit money beforehand to projects they want to see done. It's not hiring anyone to do it, just throwing money at the first person who does it because they wanted to.\n\nWhile calling `create`, the creator may specify a set of **voters** that will determine if the task was fulfilled or not. The creator is always a voter. If no **voters** are specified the creator will decide alone. The **number of votes needed** for a resolution to be reached must be specified, otherwise it will be 1 (meaning any of the voters can decide alone).\n\nAnyone can call `fund` on any task. That adds money to the task. If a task is perceived to be for the common good then many people will fund it and increase the incentive for someone to try to complete it. To `fund` it's not necessary to be authenticated, one can fund anonymously, but if the voters decide to `delete` the task anonymous funds will be lost.\n\nAnyone can call `complete` and specify a free-text field describing what he did or something like that and linking to relevant resources.\n\nThe voters mechanism above is applied to `award` and `delete`. when a task is awarded the bounty prize goes to the awardee and the task becomes closed forever. When a task is deleted money is returned to funders.\n\nFor all reputation concerns (like asserting the identity of voters or completers), accounts are expected to be linked at [Keybase Account Directory ](https://etleneum.com/#/contract/cog4wt7q8n3) or https://kad.etleneum.com/, but this is not mandatory.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 228101000,
+        "ncalls": 33,
+        "methods": null
+      },
+      {
+        "id": "cyw4i7lxd5",
+        "name": "Number",
+        "readme": "This contract is completely useless.\nIt allows you to control a number.\n\nMake a call to `up` and the number will go up, make a call to `down` and the number will go down.\n\nOptionally include an `amount` in your call and the number will go up or down by that amount.\n\nYou don't have to include any satoshis in the calls.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 34000,
+        "ncalls": 24,
+        "methods": null
+      },
+      {
+        "id": "ccg0i764ou",
+        "name": "Pyramid of Richness",
+        "readme": "A simple ponzi scheme that will make you rich!\n\nContribute 100 satoshi, then call your friends and soon you'll receive 200 satoshi on your account.\n\nRemember: the calls will only work if you're logged.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 800000,
+        "ncalls": 15,
+        "methods": null
+      },
+      {
+        "id": "cqw0c78btl",
+        "name": "HTLC",
+        "readme": "This contract enables creation, redemption and cancellation of Hashed Timelocked Contracts.\n\n`create` takes a `hash` (a 32-byte hex-encoded string for which you must know the preimage otherwise no one will be able to redeem the HTLC), and a `timelock` in seconds (defaults to 5 days). If you want to be able to cancel the HTLC after the timelock you must make this call authenticated.\n\n`redeem` takes a `hash` to identify which HTLC you're redeeming and a `preimage` for which `sha256(preimage) == hash`. This call must be done authenticated so you can get the redeemed funds in your account.\n\n`cancel` takes a `hash` to identify which HTLC you're cancelling.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 1010000,
+        "ncalls": 6,
+        "methods": null
+      },
+      {
+        "id": "c74gu1vyge",
+        "name": "friendly bets",
+        "readme": "A contract for friendly bets. One person proposes a bet by calling `create` with the terms of the bet (for example, `terms=\"it will rain tomorrow\"`) and the sides (for example, `yes=[my_account]` and `no=[friend_account]`). The number of satoshis included is the value of the bet. A parameter `resolve_at` in the format `yyyy-mm-dd` must also be provided. The bet can't be resolved until that date. Finally, an optional parameter `resolver` may be provided as a user account. If it is, then that account may resolve the bet on behalf of the two peers.\n\nThe other party can then call `accept` with the exact same amount and a parameter `with=[creator_account]` to accept the bet (the bet id is generated from the two sides plus the amount).\n\nTo resolve the bet, both peers must call `resolve` with the same `result=[either 'yes' or 'no']`. Otherwise the bet will remain unresolved. If a \"resolver\" was specified that can also call `resolve` and that will settle the bet.\n\nAny party can `cancel` the bet as long as it is still pending. Otherwise it will be automatically canceled 15 days after the date in which it should have been resolved. It will also be automatically canceled if it's pending at the date it should be resolved. When it is canceled people who put money in it get their money back.\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 2100000,
+        "ncalls": 6,
+        "methods": null
+      },
+      {
+        "id": "cggfn119iu",
+        "name": "btc.lawyer Sponsored Ads\n",
+        "readme": "Sponsored ads at https://btc.lawyer\n\n",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 10000,
+        "ncalls": 142,
+        "methods": null
+      },
+      {
+        "id": "c3c32774v6",
+        "name": "Keybase Account Directory",
+        "readme": "This exists so you can link your etleneum.com account (which is just a random id) with a Keybase account. Could be useful so people can be find your account and refer to your etleneum.com id in other contracts or calls and send you money knowing it's really you.\n\nTo `link` an identity, make an authenticated call providing your `keybase_name` and a `bundle` of message + signature as produced by https://keybase.io/sign, example:\n\n```\n-----BEGIN PGP SIGNED MESSAGE-----\nHash: SHA512\n\n3924hgisdfo8q27g34pa8sgcpa9gf4piawvfd\n-----BEGIN PGP SIGNATURE-----\nVersion: Keybase OpenPGP v2.1.3\nComment: https://keybase.io/crypto\n\nwsBcBAABCgAGBQJdrR2oAAoJEAJs7pbOl+xqQA0H/32xUyVE+GSxsJ5xN1IbbBsK\neZH7H2IqQ+VTWUcS0x0JprsfKWlZ9Eks3mWpSOG6Jb9TUX08t+JAMS56uZNU5zeX\nwN5i3Cc6V9R7q0Nzk/b2Z7wsZfuyhoxF/ybCnYy4Mj5NnkIo+yt44+s3L3MA1aEg\nnkcg9JeJHzdu/jwQ4Lc6StJ8d3OV+7igQo8Ax0aAFV7pS3tSg3upqd6M5JtmiuIq\n4lkU4NkaGGMJTnpCcUajn+z9isUUyQR5B+sMI3w7Q6jNZ0FRe7NAVKxl3d6QfwA9\npDYxl6ZWEnVSWjqM6V2Rncu1zR4g83++z8bqWrK2FBm8EzTHUVDPChPwEzFHLrQ=\n=LcDv\n-----END PGP SIGNATURE-----\n```\n\nThe signed message can be any random thing, provided it's not ever reused and not too big.\n\nTo `unlink` an identity, do the same, but be sure to make the call unauthenticated. The `unlink` method is just an alias.",
+        "created_at": "0001-01-01T00:00:00Z",
+        "funds": 0,
+        "ncalls": 3,
+        "methods": null
+      }
+    ]
+  }
+</script>
+<script type="module">
+  import { Component, h, html, render } from 'https://unpkg.com/spux?module'
+  import 'https://cdn.skypack.dev/dior'
+
+  async function renderAll () {
+    render(
+      html`
+        ${di.data.value.map(
+          i =>
+            html`
+              <div class="row">
+                <div class="col 3">${i.name}</div>
+                <div class="col 3">
+                  <a
+                    target="_blank"
+                    href="${'https://etleneum.com/~/contract/' + i.id}"
+                    >${i.id}</a
+                  >
+                </div>
+                <div class="col 3">${i.funds}</div>
+                <div class="col 3">${i.ncalls}</div>
+              </div>
+            `
+        )}
+      `,
+      document.body
+    )
+  }
+
+  async function main () {
+    renderAll()
+  }
+
+  main()
+</script>
