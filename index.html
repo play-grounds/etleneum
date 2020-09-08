@@ -7,7 +7,7 @@
     <script type="module">
       import { html, render } from 'https://unpkg.com/spux?module'
 
-      const title = 'etleneum playground'
+      const title = 'Etleneum Playground'
 
       var l = [
         { href: 'contracts.html', text: 'all contracts' },
@@ -16,7 +16,7 @@
 
       render(
         html`
-          <h1>Eleneum</h1>
+          <h1>${title}</h1>
 
           ${l.map(
             i => html`
