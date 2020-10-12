@@ -4,12 +4,13 @@ const express = require('express')
 const LnurlAuth = require('passport-lnurl-auth')
 const passport = require('passport')
 const session = require('express-session')
+const argv = require('minimist')(process.argv.slice(2))
 
 const app = express()
 
 const config = {
-  host: '08690cf276fa.ngrok.io',
-  port: 3111,
+  host: '08690cf276fa.ngrok.io' || argv.host,
+  port: 3111 || argv.port,
   url: null
 }
 
